@@ -7,9 +7,14 @@ void Game::Setup()
     walls.push_back(Wall(15, 4));
 }
 
-void Game::ProcessInput(int key)
+void Game::UpdatePossition()
 {
-    player.Move(key);
+    player.Move();
+}
+                                            
+void Game::UpdateDirection(int key)
+{
+    player.GetDirection(key);
 }
 
 /// <summary>

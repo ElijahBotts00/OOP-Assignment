@@ -1,9 +1,15 @@
 #include "raylib.h"
 #include "Game.h"
+#include <string>
+#include <iostream>
+#include <chrono>
+#include <thread>
+
+using namespace std;
 
 int main()
 {
-    InitWindow(900, 600, "OOP Assignment 1");
+    InitWindow(600, 600, "SNAKE");
     SetTargetFPS(60);
 
     Game game;
@@ -13,13 +19,20 @@ int main()
     {
         BeginDrawing();
         ClearBackground(DARKGRAY);
-
+        
         if (game.IsRunning())
         {
-            if (IsKeyPressed(KEY_RIGHT))  game.ProcessInput(KEY_RIGHT);
-            if (IsKeyPressed(KEY_LEFT))   game.ProcessInput(KEY_LEFT);
-            if (IsKeyPressed(KEY_UP))     game.ProcessInput(KEY_UP);
-            if (IsKeyPressed(KEY_DOWN))   game.ProcessInput(KEY_DOWN);
+            /// <summary>
+            /// Uses constant loop of game running to constantly update position of the snake in the direction of key input
+            /// On arrow key press direction is updated.
+            /// ---Fergus
+            /// </summary>
+            game.UpdatePossition();
+            if (IsKeyPressed(KEY_RIGHT))  game.UpdateDirection(KEY_RIGHT);
+            if (IsKeyPressed(KEY_LEFT))   game.UpdateDirection(KEY_LEFT);
+            if (IsKeyPressed(KEY_UP))     game.UpdateDirection(KEY_UP);
+            if (IsKeyPressed(KEY_DOWN))   game.UpdateDirection(KEY_DOWN);
+            std::this_thread::sleep_for(125ms);
         }
         else
         {
@@ -40,7 +53,7 @@ int main()
                 switch (grid[y][x])
                 {
                     case FLOOR:  DrawRectangle(xPosition, yPosition, cellSize, cellSize, DARKGREEN); break;
-                    case WALL:   DrawRectangle(xPosition, yPosition, cellSize, cellSize, LIGHTGRAY); break;
+                    case WALL:   DrawRectangle(xPosition, yPosition, cellSize, cellSize, BLACK); break;
                     case PLAYER: DrawRectangle(xPosition, yPosition, cellSize, cellSize, GREEN);     break;
                     default:     assert(false);  // if this hits you probably forgot to add your new tile type :)
                 }

@@ -13,11 +13,11 @@ class Player
         int GetY();
         char GetSymbol() const;
         bool IsAtPosition(int x, int y);
-
+        char GetDirection(int key);
         // mutators
-        void Move(int key);
-
+        void Move();
         char symbol;
+        char direction;
         int  x, y;
 
     private:
@@ -26,6 +26,7 @@ class Player
         bool escaped;
         int dx;
         int dy;
+        
 
         // supporting functions 
         void PositionInMiddleOfGrid();

@@ -1,4 +1,7 @@
 #include "Player.h"
+#include <string>
+#include <iostream>
+using namespace std;
 
 Player::Player() : symbol(PLAYER), x(0), y(0), alive(true), escaped(false), dx(0), dy(0)
 {
@@ -25,31 +28,55 @@ bool Player::IsAtPosition(int x, int y)
     return this->x == x && this->y == y;
 }
 
-void Player::Move(int key)
+/// <summary>
+/// This function gets key inputs and records inputs and returns as char direction (L - Left, R - Right ect..)
+/// Direction is then used in the case statement below to update position of the snake depending on current direction.
+/// ---Fergus
+/// </summary>
+char Player::GetDirection(int key)
 {
-    switch (key)
+    if (key == KEY_LEFT)
     {
-    case KEY_LEFT:
+        direction = 'L';
+    }
+    else if (key == KEY_RIGHT)
+    {
+        direction = 'R';
+    }
+    else if (key == KEY_UP)
+    {
+        direction = 'U';
+    }
+    else if (key == KEY_DOWN)
+    {
+        direction = 'D';
+    }
+    return direction;
+}
+
+void Player::Move()
+{
+    switch (direction)
+    {
+    case 'L':
         dx = -1;
         dy = 0;
         break;
-    case KEY_RIGHT:
+    case 'R':
         dx = +1;
         dy = 0;
         break;
-    case KEY_UP:
+    case 'U':
         dx = 0;
         dy = -1;
         break;
-    case KEY_DOWN:
+    case 'D':
         dx = 0;
         dy = +1;
         break;
     default:
-        // not a key we care about, so do nothing
         break;
     }
-
     // update mouse coordinates if move is possible
     if (((x + dx) >= 1) && ((x + dx) <= SIZE) && ((y + dy) >= 1) && ((y + dy) <= SIZE))
     {

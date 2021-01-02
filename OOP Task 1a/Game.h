@@ -14,7 +14,8 @@ class Game
       Player player;
       vector<Wall> walls;
       void Setup();
-      void ProcessInput(int key);
+      void UpdatePossition();
+      void UpdateDirection(int key);
       vector<vector<char>> PrepareGrid();
       bool IsRunning();
       bool IsWallAtPosition(int x, int y);
