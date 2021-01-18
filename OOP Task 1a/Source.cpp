@@ -55,7 +55,6 @@ int main()
                     case FLOOR:  DrawRectangle(xPosition, yPosition, cellSize, cellSize, DARKGREEN); break;
                     case WALL:   DrawRectangle(xPosition, yPosition, cellSize, cellSize, BLACK); break;
                     case PLAYER: DrawRectangle(xPosition, yPosition, cellSize, cellSize, GREEN);     break;
-                    case APPLE:  DrawRectangle(xPosition, yPosition, cellSize, cellSize, RED);     break;
                     default:     assert(false);  // if this hits you probably forgot to add your new tile type :)
                 }
 
