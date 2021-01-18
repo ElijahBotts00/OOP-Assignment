@@ -39,6 +39,10 @@ vector<vector<char>> Game::PrepareGrid()
             {
                 line.push_back(player.GetSymbol());
             }
+            else if (row == apple.get_y() && col == apple.get_x() && apple.collected != true)
+            {
+                line.push_back(apple.get_symbol());
+            }
             else if (IsWallAtPosition(col, row))
             {
                 line.push_back(WALL);

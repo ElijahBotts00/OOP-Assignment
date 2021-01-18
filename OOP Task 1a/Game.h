@@ -5,6 +5,7 @@
 #include <vector>
 #include "Player.h"
 #include "Wall.h"
+#include "Apple.h"
 
 using namespace std;
 
@@ -12,6 +13,7 @@ class Game
 {
    public:
       Player player;
+      Apple apple;
       vector<Wall> walls;
       void Setup();
       void UpdatePossition();
