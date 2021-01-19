@@ -1,5 +1,8 @@
 #include "Menu.h"
-
+bool Menu::mouseOnText4()
+{
+    return  verdict4;
+}
 bool Menu::mouseOnText2()
 {
     return  verdict;
@@ -60,6 +63,11 @@ void Menu::predraw()
     else verdict = false;
     if (verdict) framesCounter++;
     else framesCounter = 0;
+
+    if (CheckCollisionPointRec(GetMousePosition(), exitGame)) verdict4 = true;
+    else verdict4 = false;
+    if (verdict4) framesCounter++;
+    else framesCounter = 0;
 }
 
 void Menu::drawmenu()
@@ -78,7 +86,17 @@ void Menu::drawmenu()
 
     DrawText(": CONTINUE", 430, 370, 20, LIGHTGRAY);
     DrawText(": HIGH SCORES", 430, 390, 20, LIGHTGRAY);
-    DrawText(": EXIT", 430, 410, 20, LIGHTGRAY);
+
+
+    if (mouseOnText4()) {
+        DrawText(": EXIT", 430, 410, 20, RED);
+        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+        {
+            mnum = 4;
+        }
+    }
+    else  DrawText(": EXIT", 430, 410, 20, WHITE);
+
 }
 
 void Menu::drawmenu2()

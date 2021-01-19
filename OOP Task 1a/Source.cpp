@@ -37,6 +37,12 @@ int main()
             {
                 menu.drawmenu2();
             }
+            if (menu.whichMenu() == 4)
+            {
+              
+                CloseWindow();
+                return 0;
+            }
         }
         else
         {
