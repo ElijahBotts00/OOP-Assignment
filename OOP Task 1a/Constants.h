@@ -5,9 +5,11 @@
 
 // symbols used for storing where things are
 #define PLAYER    'P'
+#define TAIL	  'S'
 #define HOLE      'H'
 #define WALL      'W'
 #define FLOOR     'F'
+#define APPLE	  'A'
 
 // the command letters to move the mouse on the maze
 #define KEY_RIGHT 262

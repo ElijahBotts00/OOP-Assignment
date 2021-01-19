@@ -1,6 +1,9 @@
 #include "Player.h"
 #include <string>
 #include <iostream>
+#include <chrono>
+#include <thread>
+#include <iostream>
 using namespace std;
 
 Player::Player() : symbol(PLAYER), x(0), y(0), alive(true), escaped(false), dx(0), dy(0)
@@ -56,6 +59,7 @@ char Player::GetDirection(int key)
 
 void Player::Move()
 {
+    std::this_thread::sleep_for(125ms);
     switch (direction)
     {
     case 'L':
@@ -83,6 +87,18 @@ void Player::Move()
         UpdatePosition(dx, dy);
     }
 }
+
+bool Player::EatenApple(Apple nu)
+{
+
+    if (IsAtPosition(nu.get_x(), nu.get_y()))
+    {
+        return true;
+    }
+
+    return false;
+}
+
 
 void Player::UpdatePosition(int dx, int dy)
 {

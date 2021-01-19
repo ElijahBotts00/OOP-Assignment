@@ -9,60 +9,135 @@ using namespace std;
 
 int main()
 {
-    InitWindow(600, 600, "SNAKE");
+    InitWindow(900, 600, "OOP Assignment 1");
     SetTargetFPS(60);
-
+    const char MAX_INPUT_CHARS = 15;
+    char name[MAX_INPUT_CHARS + 1] = "\0";
+    int letterCount = 0;
+    Rectangle textBox = { 450, 280, 325, 60 };
+    int framesCounter = 0;
+    bool mouseOnText = false;
+    Image image = LoadImage("snakes.png");
+    Texture2D texture = LoadTextureFromImage(image);
+    UnloadImage(image);
     Game game;
     game.Setup();
 
     while (!WindowShouldClose())
     {
-        BeginDrawing();
-        ClearBackground(DARKGRAY);
-        
-        if (game.IsRunning())
+        // Update
+        //----------------------------------------------------------------------------------
+        mouseOnText = true;
+        if (mouseOnText)
         {
-            /// <summary>
-            /// Uses constant loop of game running to constantly update position of the snake in the direction of key input
-            /// On arrow key press direction is updated.
-            /// ---Fergus
-            /// </summary>
-            game.UpdatePossition();
-            if (IsKeyPressed(KEY_RIGHT))  game.UpdateDirection(KEY_RIGHT);
-            if (IsKeyPressed(KEY_LEFT))   game.UpdateDirection(KEY_LEFT);
-            if (IsKeyPressed(KEY_UP))     game.UpdateDirection(KEY_UP);
-            if (IsKeyPressed(KEY_DOWN))   game.UpdateDirection(KEY_DOWN);
-            std::this_thread::sleep_for(125ms);
-        }
-        else
-        {
-            DrawText("TODO: Why did the game end?", 610, 10, 20, LIGHTGRAY);
-        }
+            // Get char pressed (unicode character) on the queue
+            int key = GetKeyPressed();
 
-        const int cellSize = (int)((float)GetScreenHeight() / (float)(SIZE));
-
-        const auto grid = game.PrepareGrid();
-
-        for (int x = 0; x < SIZE; x++)
-        {
-            for (int y = 0; y < SIZE; y++)
+            // Check if more characters have been pressed on the same frame
+            while (key > 0)
             {
-                int xPosition = x * cellSize;
-                int yPosition = y * cellSize;
-
-                switch (grid[y][x])
+                // NOTE: Only allow keys in range [32..125]
+                if ((key >= 32) && (key <= 125) && (letterCount < MAX_INPUT_CHARS))
                 {
-                    case FLOOR:  DrawRectangle(xPosition, yPosition, cellSize, cellSize, DARKGREEN); break;
-                    case WALL:   DrawRectangle(xPosition, yPosition, cellSize, cellSize, BLACK); break;
-                    case PLAYER: DrawRectangle(xPosition, yPosition, cellSize, cellSize, GREEN);     break;
-                    default:     assert(false);  // if this hits you probably forgot to add your new tile type :)
+                    name[letterCount] = (char)key;
+                    letterCount++;
                 }
 
-                // draw lines around each tile, remove this if you don't like it!
-                DrawRectangleLines(x * cellSize, y * cellSize, cellSize, cellSize, DARKGRAY);
+                key = GetKeyPressed();  // Check next character in the queue
+            }
+
+            if (IsKeyPressed(KEY_BACKSPACE))
+            {
+                letterCount--;
+                if (letterCount < 0) letterCount = 0;
+                name[letterCount] = '\0';
+            }
+
+            if (IsKeyPressed(KEY_ENTER))
+            {
+                if (letterCount > 0)
+                    game.name = 1;
+
             }
         }
 
+        if (mouseOnText) framesCounter++;
+        else framesCounter = 0;
+
+        //---------------------------------------------------------------------------------
+        BeginDrawing();
+
+        if (game.Menu() == true)
+        {
+            ClearBackground(BLACK);
+            DrawText("SNAKE V1.0", 510, 50, 20, LIGHTGRAY);
+            DrawTexture(texture, texture.width / 2, texture.height / 10, WHITE);
+
+            DrawRectangleRec(textBox, LIGHTGRAY);
+            if (mouseOnText) DrawRectangleLines(textBox.x, textBox.y, textBox.width, textBox.height, BLACK);
+            else DrawRectangleLines(textBox.x, textBox.y, textBox.width, textBox.height, DARKGRAY);
+
+            DrawText(name, textBox.x + 5, textBox.y + 8, 40, BLACK);
+
+            if (mouseOnText)
+            {
+                if (letterCount < MAX_INPUT_CHARS)
+                {
+                    if (((framesCounter / 20) % 2) == 0) DrawText("_", textBox.x + 8 + MeasureText(name, 40), textBox.y + 12, 40, BLACK);
+                }
+                else DrawText("Max characters used... Try backspace", 430, 350, 20, GRAY);
+            }
+
+            DrawText(": INPUT NAME AND PRESS ENTER", 430, 250, 20, LIGHTGRAY);
+        }
+        else
+        {
+            ClearBackground(DARKGRAY);
+
+            if (game.IsRunning())
+            {
+                /// <summary>
+                /// Uses constant loop of game running to constantly update position of the snake in the direction of key input
+                /// On arrow key press direction is updated.
+                /// ---Fergus
+                /// </summary>
+                game.UpdatePossition();
+                if (IsKeyPressed(KEY_RIGHT))  game.UpdateDirection(KEY_RIGHT);
+                if (IsKeyPressed(KEY_LEFT))   game.UpdateDirection(KEY_LEFT);
+                if (IsKeyPressed(KEY_UP))     game.UpdateDirection(KEY_UP);
+                if (IsKeyPressed(KEY_DOWN))   game.UpdateDirection(KEY_DOWN);
+            }
+            else
+            {
+                DrawText("TODO: Why did the game end?", 610, 10, 20, LIGHTGRAY);
+            }
+
+            const int cellSize = (int)((float)GetScreenHeight() / (float)(SIZE));
+
+            const auto grid = game.PrepareGrid();
+
+            for (int x = 0; x < SIZE; x++)
+            {
+                for (int y = 0; y < SIZE; y++)
+                {
+                    int xPosition = x * cellSize;
+                    int yPosition = y * cellSize;
+
+                    switch (grid[y][x])
+                    {
+                    case FLOOR:  DrawRectangle(xPosition, yPosition, cellSize, cellSize, DARKGREEN);break;
+                    case WALL:   DrawRectangle(xPosition, yPosition, cellSize, cellSize, BLACK);    break;
+                    case PLAYER: DrawRectangle(xPosition, yPosition, cellSize, cellSize, PURPLE);   break;
+                    case TAIL:   DrawRectangle(xPosition, yPosition, cellSize, cellSize, BROWN);    break;
+                    case APPLE:  DrawRectangle(xPosition, yPosition, cellSize, cellSize, RED);      break;
+                    default:     assert(false);  // if this hits you probably forgot to add your new tile type :)
+                    }
+
+                    // draw lines around each tile, remove this if you don't like it!
+                    DrawRectangleLines(x * cellSize, y * cellSize, cellSize, cellSize, DARKGRAY);
+                }
+            }
+        }
         EndDrawing();
     }
 

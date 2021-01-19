@@ -9,7 +9,11 @@ void Game::Setup()
 
 void Game::UpdatePossition()
 {
+    tail.Move(player.GetX(), player.GetY());
+    apply_rules();
     player.Move();
+   // cout << to_string(player.GetX()) + "*" + to_string(player.GetY()) + " ";
+    
 }
                                             
 void Game::UpdateDirection(int key)
@@ -38,6 +42,14 @@ vector<vector<char>> Game::PrepareGrid()
             if (row == player.GetY() && col == player.GetX())
             {
                 line.push_back(player.GetSymbol());
+            }
+            else if (IsTailAtPosition(col, row))
+            {
+                line.push_back(TAIL);
+            }
+            else if ((row == apple.get_y() && col == apple.get_x() && apple.collected != true))
+            {
+                line.push_back(apple.get_symbol());
             }
             else if (IsWallAtPosition(col, row))
             {
@@ -69,9 +81,67 @@ bool Game::IsWallAtPosition(int x, int y)
     return false;
 }
 
+bool Game::IsTailAtPosition(int x, int y)
+{
+    for (size_t i = 0; i < tail.tailPosition.size(); ++i)
+    {
+        if (tail.tailPosition[i].IsAtPosition(x, y))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void Game::apply_rules()
+{
+    if (player.EatenApple(apple))
+    {
+        apple.eaten();
+        int i;
+        i = atoi(score.c_str());
+        i++;
+        score = to_string(i);
+        apple.~Apple();            // destroy the old one first.
+        new (&apple) Apple();      // Call the constructor 
+
+    }
+
+}
+
 bool Game::IsRunning()
 {
+    if (IsWallAtPosition(player.GetX(), player.GetY()))
+    {
+
+    }
     // depending on your game you'll need to modify this to return false
     // maybe it's when the player runs out of moves, maybe it's when they get caught, it's up to you!
     return true;
+}
+
+bool Game::Menu()
+{
+    if (name == 0)
+        return true;
+
+    if (name == 1)
+        return false;
+}
+string Game::eapple()
+{
+    if (apple.collected == true)
+        return "You SCORED!";
+}
+
+string Game::get_end_reason()
+{
+
+    return "You hit a wall!";
+}
+
+string Game::scores()
+{
+    return score;
 }

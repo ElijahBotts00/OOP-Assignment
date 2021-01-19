@@ -1,6 +1,7 @@
 #pragma once
 
 #include "constants.h"
+#include "Apple.h"
 
 class Player
 {
@@ -14,6 +15,8 @@ class Player
         char GetSymbol() const;
         bool IsAtPosition(int x, int y);
         char GetDirection(int key);
+        bool EatenApple(Apple apple);
+
         // mutators
         void Move();
         char symbol;
