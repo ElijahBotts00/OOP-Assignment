@@ -107,6 +107,22 @@ void Game::apply_rules()
         new (&apple) Apple();      // Call the constructor 
 
     }
+    if (IsWallAtPosition(apple.get_x(), apple.get_y()))
+    {
+        apple.~Apple();            // destroy the old one first.
+        new (&apple) Apple();      // Call the constructor 
+    }
+    if (player.IsAtPosition(apple.get_x(), apple.get_y()))
+    {
+        apple.~Apple();            // destroy the old one first.
+        new (&apple) Apple();      // Call the constructor 
+    }
+    if (tail.IsAtPosition(apple.get_x(), apple.get_y()))
+    {
+        apple.~Apple();            // destroy the old one first.
+        new (&apple) Apple();      // Call the constructor 
+    }
+
 
 }
 
@@ -114,7 +130,7 @@ bool Game::IsRunning()
 {
     if (IsWallAtPosition(player.GetX(), player.GetY()))
     {
-
+        return false;
     }
     // depending on your game you'll need to modify this to return false
     // maybe it's when the player runs out of moves, maybe it's when they get caught, it's up to you!
