@@ -106,10 +106,14 @@ int main()
                 if (IsKeyPressed(KEY_LEFT))   game.UpdateDirection(KEY_LEFT);
                 if (IsKeyPressed(KEY_UP))     game.UpdateDirection(KEY_UP);
                 if (IsKeyPressed(KEY_DOWN))   game.UpdateDirection(KEY_DOWN);
+                DrawText(FormatText("Name: %s", name), 610, 10, 20, MAROON);
+                DrawText(game.scores().c_str(), 610, 30, 30, MAROON);
             }
             else
             {
-                DrawText("TODO: Why did the game end?", 610, 10, 20, LIGHTGRAY);
+                DrawText(FormatText("Name: %s", name), 610, 10, 20, MAROON);
+                DrawText(game.scores().c_str(), 610, 30, 30, MAROON);
+                DrawText(game.get_end_reason().c_str(), 610, 60, 20, LIGHTGRAY); //raylib
             }
 
             const int cellSize = (int)((float)GetScreenHeight() / (float)(SIZE));

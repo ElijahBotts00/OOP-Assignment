@@ -16,6 +16,7 @@ class Player
         bool IsAtPosition(int x, int y);
         char GetDirection(int key);
         bool EatenApple(Apple apple);
+        bool isalive();
 
         // mutators
         void Move();

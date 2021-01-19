@@ -118,7 +118,7 @@ bool Game::IsRunning()
     }
     // depending on your game you'll need to modify this to return false
     // maybe it's when the player runs out of moves, maybe it's when they get caught, it's up to you!
-    return true;
+    return player.isalive();
 }
 
 bool Game::Menu()

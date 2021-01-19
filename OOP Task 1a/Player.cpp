@@ -86,8 +86,14 @@ void Player::Move()
     {
         UpdatePosition(dx, dy);
     }
+    else
+        alive = false;
 }
 
+bool Player::isalive()
+{
+    return alive;
+}
 bool Player::EatenApple(Apple nu)
 {
 
