@@ -99,10 +99,7 @@ void Game::apply_rules()
     if (player.EatenApple(apple))
     {
         apple.eaten();
-        int i;
-        i = atoi(score.c_str());
-        i++;
-        score = to_string(i);
+        score++;
         apple.~Apple();            // destroy the old one first.
         new (&apple) Apple();      // Call the constructor 
         if (IsWallAtPosition(apple.get_x(), apple.get_y()))
@@ -172,7 +169,7 @@ string Game::get_end_reason()
     return "You hit a wall!";
 }
 
-string Game::scores()
+int Game::scores()
 {
     return score;
 }

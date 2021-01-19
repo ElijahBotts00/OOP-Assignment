@@ -28,8 +28,8 @@ class Game
       int name;
       string eapple();
       string get_end_reason();
-      string scores();
-      string score = "0";
+      int scores();
+      int score = 0;
 
 private:
     void apply_rules();

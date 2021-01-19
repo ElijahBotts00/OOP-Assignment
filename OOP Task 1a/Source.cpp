@@ -7,8 +7,15 @@
 
 using namespace std;
 
+typedef enum {
+    STORAGE_POSITION_SCORE = 0,
+    STORAGE_POSITION_HISCORE = 1
+} StorageData;
+
 int main()
 {
+    //string score;
+    int hiScore = 0;
     InitWindow(900, 600, "OOP Assignment 1");
     SetTargetFPS(60);
     const char MAX_INPUT_CHARS = 15;
@@ -107,12 +114,12 @@ int main()
                 if (IsKeyPressed(KEY_UP))     game.UpdateDirection(KEY_UP);
                 if (IsKeyPressed(KEY_DOWN))   game.UpdateDirection(KEY_DOWN);
                 DrawText(FormatText("Name: %s", name), 610, 10, 20, MAROON);
-                DrawText(game.scores().c_str(), 610, 30, 30, MAROON);
+                DrawText(TextFormat("SCORE: %i", game.score), 610, 30, 30, MAROON);
             }
             else
             {
                 DrawText(FormatText("Name: %s", name), 610, 10, 20, MAROON);
-                DrawText(game.scores().c_str(), 610, 30, 30, MAROON);
+                DrawText(TextFormat("SCORE: %i", game.score), 610, 30, 30, MAROON);
                 DrawText(game.get_end_reason().c_str(), 610, 60, 20, LIGHTGRAY); //raylib
             }
 
@@ -135,6 +142,7 @@ int main()
                     case TAIL:   DrawRectangle(xPosition, yPosition, cellSize, cellSize, BROWN);    break;
                     case APPLE:  DrawRectangle(xPosition, yPosition, cellSize, cellSize, RED);      break;
                     default:     assert(false);  // if this hits you probably forgot to add your new tile type :)
+                    
                     }
 
                     // draw lines around each tile, remove this if you don't like it!
