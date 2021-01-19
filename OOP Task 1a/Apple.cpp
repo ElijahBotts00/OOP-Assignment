@@ -1,5 +1,7 @@
 #include "Apple.h"
 
+
+
 Apple::Apple() : symbol(APPLE), x(0), y(0), collected(false)
 {
 	position();
@@ -37,6 +39,7 @@ void Apple::eaten()
 
 void Apple::position()
 {
+
 	x = (rand() % 20);
 	y = (rand() % 20);
 }

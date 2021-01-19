@@ -103,8 +103,6 @@ void Game::apply_rules()
         i = atoi(score.c_str());
         i++;
         score = to_string(i);
-        apple.~Apple();            // destroy the old one first.
-        new (&apple) Apple();      // Call the constructor 
         if (IsWallAtPosition(apple.get_x(), apple.get_y()))
         {
             apple.~Apple();            // destroy the old one first.
@@ -120,7 +118,6 @@ void Game::apply_rules()
             apple.~Apple();            // destroy the old one first.
             new (&apple) Apple();      // Call the constructor 
         }
-
     }
     if (IsWallAtPosition(apple.get_x(), apple.get_y()))
     {
