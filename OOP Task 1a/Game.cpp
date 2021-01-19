@@ -9,8 +9,8 @@ void Game::Setup()
 
 void Game::UpdatePossition()
 {
-    tail.Move(player.GetX(), player.GetY());
     apply_rules();
+    tail.Move(player.GetX(), player.GetY());
     player.Move();
    // cout << to_string(player.GetX()) + "*" + to_string(player.GetY()) + " ";
     
@@ -105,6 +105,21 @@ void Game::apply_rules()
         score = to_string(i);
         apple.~Apple();            // destroy the old one first.
         new (&apple) Apple();      // Call the constructor 
+        if (IsWallAtPosition(apple.get_x(), apple.get_y()))
+        {
+            apple.~Apple();            // destroy the old one first.
+            new (&apple) Apple();      // Call the constructor 
+        }
+        if (player.IsAtPosition(apple.get_x(), apple.get_y()))
+        {
+            apple.~Apple();            // destroy the old one first.
+            new (&apple) Apple();      // Call the constructor 
+        }
+        if (tail.IsAtPosition(apple.get_x(), apple.get_y()))
+        {
+            apple.~Apple();            // destroy the old one first.
+            new (&apple) Apple();      // Call the constructor 
+        }
 
     }
     if (IsWallAtPosition(apple.get_x(), apple.get_y()))
