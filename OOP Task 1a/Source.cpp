@@ -11,7 +11,6 @@ using namespace std;
 
 int main()
 {
-
     char option = 'U';
     InitWindow(900, 600, "OOP Assignment 1");
     SetTargetFPS(60);
@@ -22,8 +21,7 @@ mylabel:
 
     while (!WindowShouldClose())
     {
-   
-        switch (menu.whichMenu()) {
+           switch (menu.whichMenu()) {
         case 1:
             menu.predraw();
             break;
@@ -129,9 +127,6 @@ mylabel:
             }
             EndDrawing();
 
-       
-     
-  
     }
 
         game.UpdateScore();

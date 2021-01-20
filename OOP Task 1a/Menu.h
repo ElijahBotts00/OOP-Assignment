@@ -15,6 +15,7 @@ public:
     void drawmenu2();
     void drawmenu3();
     char name[15 + 1] = "\0";
+    char highScore[15 + 1] = "\0";
     int mnum = 1;
 
 private:

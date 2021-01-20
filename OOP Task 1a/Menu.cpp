@@ -1,6 +1,7 @@
 #include "Menu.h"
 #include <fstream>
 #include <string>
+using namespace std;
 
 
 
@@ -193,10 +194,28 @@ void Menu::drawmenu3()
 {
     ClearBackground(BLACK);
     DrawText("SNAKE V1.0", 360, 50, 20, LIGHTGRAY);
-  
+    int numberOfStrings = 0;
+    string temp[20];
+    ifstream myFile_Handler;
 
+    myFile_Handler.open("scores.txt");
 
-    DrawText("INPUT NAME AND PRESS ENTER", 260, 250, 20, LIGHTGRAY);
+    if (myFile_Handler.is_open())
+    {
+        while (getline(myFile_Handler, temp[numberOfStrings]))
+        {
+            numberOfStrings++;
+        }
+        myFile_Handler.close();
+    }
+
+    int height = 150;
+    for (int i = 0; i < numberOfStrings; i++)
+    {
+        strcpy_s(highScore, temp[i].c_str());
+        DrawText(highScore, 260, height, 20, LIGHTGRAY);
+        height = height + 20;
+    }
 }
 
 
