@@ -23,38 +23,28 @@ mylabel:
     while (!WindowShouldClose())
     {
    
-        
-        if (menu.whichMenu() == 1)
-        {
+        switch (menu.whichMenu()) {
+        case 1:
             menu.predraw();
-        }
-        if (menu.whichMenu() == 2)
-        {
+            break;
+        case 2:
             menu.predraw2();
-        }
-        if (menu.whichMenu() == 3)
-        {
+        case 3:
             menu.predraw3();
+            break;
         }
-      
-            BeginDrawing();
             if (menu.whichMenu() != 0)
             {
-                if (menu.whichMenu() == 1)
-                {
+                switch (menu.whichMenu()) {
+                case 1:
                     menu.drawmenu();
-                }
-                if (menu.whichMenu() == 2)
-                {
+                    break;
+                case 2:
                     menu.drawmenu2();
-                }
-                if (menu.whichMenu() == 3)
-                {
+                case 3:
                     menu.drawmenu3();
-                }
-                if (menu.whichMenu() == 4)
-                {
-
+                    break;
+                case 4:
                     CloseWindow();
                     return 0;
                 }
