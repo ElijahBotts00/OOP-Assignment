@@ -7,9 +7,5 @@ christopher 1
 bob 24 
 ditto 12
 christopher 12
-bob 24 
-christopher 1
-bob 24 
-ditto 12
-christopher 12
 bob 24  0
+ 0

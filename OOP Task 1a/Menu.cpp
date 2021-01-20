@@ -29,44 +29,7 @@ int Menu::whichMenu()
 
 void Menu::predraw3()
 {
-    if (mouseOnText())
-    {
-
-
-        // Get char pressed (unicode character) on the queue
-        int key = GetKeyPressed();
-
-        // Check if more characters have been pressed on the same frame
-        while (key > 0)
-        {
-            // NOTE: Only allow keys in range [32..125]
-            if ((key >= 32) && (key <= 125) && (letterCount < MAX))
-            {
-                name[letterCount] = (char)key;
-                letterCount++;
-            }
-
-            key = GetKeyPressed();  // Check next character in the queue
-        }
-
-        if (IsKeyPressed(KEY_BACKSPACE))
-        {
-            letterCount--;
-            if (letterCount < 0) letterCount = 0;
-            name[letterCount] = '\0';
-        }
-
-        if (IsKeyPressed(KEY_ENTER))
-        {
-            if (letterCount > 0)
-                mnum = 0;
-    
-
-        }
-    }
-
-    if (mouseOnText()) framesCounter++;
-    else framesCounter = 0;
+ 
 }
 
 void Menu::predraw2()
