@@ -4,9 +4,27 @@
 
 void Game::Setup()
 {
-    walls.push_back(Wall(4, 7));
-    walls.push_back(Wall(9, 15));
-    walls.push_back(Wall(15, 4));
+    do
+    {
+        if (IsWallAtPosition(apple.get_x(), apple.get_y()))
+        {
+            apple.collected = false;
+                apple.position();
+        }
+
+        if (player.IsAtPosition(apple.get_x(), apple.get_y()))
+        {
+            apple.collected = false;
+                apple.position();
+        }
+            if (tail.IsAtPosition(apple.get_x(), apple.get_y()))
+            {
+                apple.collected = false;
+                apple.position();
+            }
+        
+   
+    } while (apple.collected == true);
 }
 
 void Game::UpdatePossition()
@@ -118,18 +136,13 @@ void Game::apply_rules()
 
     if (player.EatenApple(apple))
     {
+
         apple.eaten();
         int i;
         i = atoi(score.c_str());
         i++;
         score = to_string(i);
-       
-        do
-        {
-          apple.collected = false;
-          apple.position();
-        } while (IsWallAtPosition(apple.get_x(), apple.get_y()) || (player.IsAtPosition(apple.get_x(), apple.get_y()) || (tail.IsAtPosition(apple.get_x(), apple.get_y()))));
-   
+        Setup();
     }
 }
 
