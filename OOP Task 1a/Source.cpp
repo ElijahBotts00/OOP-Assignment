@@ -21,10 +21,7 @@ mylabel:
 
     while (!WindowShouldClose())
     {
-
            switch (menu.whichMenu()) {
-        switch (menu.whichMenu()) {
-
         case 1:
             menu.predraw();
             break;
