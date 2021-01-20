@@ -1,10 +1,30 @@
 #include "Game.h"
+#include <fstream>
+
 
 void Game::Setup()
 {
-    walls.push_back(Wall(4, 7));
-    walls.push_back(Wall(9, 15));
-    walls.push_back(Wall(15, 4));
+    do
+    {
+        if (IsWallAtPosition(apple.get_x(), apple.get_y()))
+        {
+            apple.collected = false;
+                apple.position();
+        }
+
+        if (player.IsAtPosition(apple.get_x(), apple.get_y()))
+        {
+            apple.collected = false;
+                apple.position();
+        }
+            if (tail.IsAtPosition(apple.get_x(), apple.get_y()))
+            {
+                apple.collected = false;
+                apple.position();
+            }
+        
+   
+    } while (apple.collected == true);
 }
 
 void Game::UpdatePossition()
@@ -13,8 +33,24 @@ void Game::UpdatePossition()
     tail.Move(player.GetX(), player.GetY());
     player.Move();
    // cout << to_string(player.GetX()) + "*" + to_string(player.GetY()) + " ";
-    
 }
+void Game::UpdateScore()
+{
+
+    ofstream foutput;
+    ifstream finput;
+    finput.open("scores.txt");
+    foutput.open("scores.txt", ios::app);
+    if (finput.is_open())
+    foutput << cname << " " << score<< "\n";
+    finput.close();
+    foutput.close();
+
+}
+
+
+
+
                                             
 void Game::UpdateDirection(int key)
 {
@@ -96,46 +132,18 @@ bool Game::IsTailAtPosition(int x, int y)
 
 void Game::apply_rules()
 {
+
+
     if (player.EatenApple(apple))
     {
+
         apple.eaten();
-        score++;
-        apple.~Apple();            // destroy the old one first.
-        new (&apple) Apple();      // Call the constructor 
-        if (IsWallAtPosition(apple.get_x(), apple.get_y()))
-        {
-            apple.~Apple();            // destroy the old one first.
-            new (&apple) Apple();      // Call the constructor 
-        }
-        if (player.IsAtPosition(apple.get_x(), apple.get_y()))
-        {
-            apple.~Apple();            // destroy the old one first.
-            new (&apple) Apple();      // Call the constructor 
-        }
-        if (tail.IsAtPosition(apple.get_x(), apple.get_y()))
-        {
-            apple.~Apple();            // destroy the old one first.
-            new (&apple) Apple();      // Call the constructor 
-        }
-
+        int i;
+        i = atoi(score.c_str());
+        i++;
+        score = to_string(i);
+        Setup();
     }
-    if (IsWallAtPosition(apple.get_x(), apple.get_y()))
-    {
-        apple.~Apple();            // destroy the old one first.
-        new (&apple) Apple();      // Call the constructor 
-    }
-    if (player.IsAtPosition(apple.get_x(), apple.get_y()))
-    {
-        apple.~Apple();            // destroy the old one first.
-        new (&apple) Apple();      // Call the constructor 
-    }
-    if (tail.IsAtPosition(apple.get_x(), apple.get_y()))
-    {
-        apple.~Apple();            // destroy the old one first.
-        new (&apple) Apple();      // Call the constructor 
-    }
-
-
 }
 
 bool Game::IsRunning()

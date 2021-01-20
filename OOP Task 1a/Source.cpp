@@ -4,6 +4,8 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include "Menu.h"
+
 
 using namespace std;
 
@@ -18,91 +20,55 @@ int main()
     int hiScore = 0;
     InitWindow(900, 600, "OOP Assignment 1");
     SetTargetFPS(60);
-    const char MAX_INPUT_CHARS = 15;
-    char name[MAX_INPUT_CHARS + 1] = "\0";
-    int letterCount = 0;
-    Rectangle textBox = { 450, 280, 325, 60 };
-    int framesCounter = 0;
-    bool mouseOnText = false;
-    Image image = LoadImage("snakes.png");
-    Texture2D texture = LoadTextureFromImage(image);
-    UnloadImage(image);
     Game game;
+    Menu menu;
     game.Setup();
 
     while (!WindowShouldClose())
     {
-        // Update
-        //----------------------------------------------------------------------------------
-        mouseOnText = true;
-        if (mouseOnText)
+        if (menu.whichMenu() == 1)
         {
-            // Get char pressed (unicode character) on the queue
-            int key = GetKeyPressed();
-
-            // Check if more characters have been pressed on the same frame
-            while (key > 0)
-            {
-                // NOTE: Only allow keys in range [32..125]
-                if ((key >= 32) && (key <= 125) && (letterCount < MAX_INPUT_CHARS))
-                {
-                    name[letterCount] = (char)key;
-                    letterCount++;
-                }
-
-                key = GetKeyPressed();  // Check next character in the queue
-            }
-
-            if (IsKeyPressed(KEY_BACKSPACE))
-            {
-                letterCount--;
-                if (letterCount < 0) letterCount = 0;
-                name[letterCount] = '\0';
-            }
-
-            if (IsKeyPressed(KEY_ENTER))
-            {
-                if (letterCount > 0)
-                    game.name = 1;
-
-            }
+            menu.predraw();
         }
-
-        if (mouseOnText) framesCounter++;
-        else framesCounter = 0;
-
-        //---------------------------------------------------------------------------------
-        BeginDrawing();
-
-        if (game.Menu() == true)
+        if (menu.whichMenu() == 2)
         {
-            ClearBackground(BLACK);
-            DrawText("SNAKE V1.0", 510, 50, 20, LIGHTGRAY);
-            DrawTexture(texture, texture.width / 2, texture.height / 10, WHITE);
-
-            DrawRectangleRec(textBox, LIGHTGRAY);
-            if (mouseOnText) DrawRectangleLines(textBox.x, textBox.y, textBox.width, textBox.height, BLACK);
-            else DrawRectangleLines(textBox.x, textBox.y, textBox.width, textBox.height, DARKGRAY);
-
-            DrawText(name, textBox.x + 5, textBox.y + 8, 40, BLACK);
-
-            if (mouseOnText)
+            menu.predraw2();
+        }
+        if (menu.whichMenu() == 3)
+        {
+            menu.predraw3();
+        }
+        BeginDrawing();
+        if (menu.whichMenu() != 0)
+        {
+            if (menu.whichMenu() == 1)
             {
-                if (letterCount < MAX_INPUT_CHARS)
-                {
-                    if (((framesCounter / 20) % 2) == 0) DrawText("_", textBox.x + 8 + MeasureText(name, 40), textBox.y + 12, 40, BLACK);
-                }
-                else DrawText("Max characters used... Try backspace", 430, 350, 20, GRAY);
+                menu.drawmenu();
             }
-
-            DrawText(": INPUT NAME AND PRESS ENTER", 430, 250, 20, LIGHTGRAY);
+            if (menu.whichMenu() == 2)
+            {
+                menu.drawmenu2();
+            }
+            if (menu.whichMenu() == 3)
+            {
+                menu.drawmenu3();
+            }
+            if (menu.whichMenu() == 4)
+            {
+              
+                CloseWindow();
+                return 0;
+            }
         }
         else
         {
             ClearBackground(DARKGRAY);
 
             if (game.IsRunning())
+               
             {
+                game.cname = menu.name;
+                
                 /// <summary>
                 /// Uses constant loop of game running to constantly update position of the snake in the direction of key input
                 /// On arrow key press direction is updated.
@@ -121,6 +87,7 @@ int main()
                 DrawText(FormatText("Name: %s", name), 610, 10, 20, MAROON);
                 DrawText(TextFormat("SCORE: %i", game.score), 610, 30, 30, MAROON);
                 DrawText(game.get_end_reason().c_str(), 610, 60, 20, LIGHTGRAY); //raylib
+                
             }
 
             const int cellSize = (int)((float)GetScreenHeight() / (float)(SIZE));
@@ -151,7 +118,11 @@ int main()
             }
         }
         EndDrawing();
+     
+  
     }
+
+        game.UpdateScore();
 
     CloseWindow();
     return 0;

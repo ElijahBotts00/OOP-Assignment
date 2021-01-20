@@ -1,8 +1,10 @@
 #include "Apple.h"
 
-Apple::Apple() : symbol(APPLE), x(0), y(0), collected(false)
+
+
+Apple::Apple() : symbol(APPLE), x(0), y(0), collected(true)
 {
-	position();
+	
 }
 
 int Apple::get_x()

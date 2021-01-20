@@ -8,6 +8,7 @@
 #include "Tail.h"
 #include "Apple.h"
 
+
 using namespace std;
 
 class Game
