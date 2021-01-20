@@ -3,6 +3,7 @@
 #include <string>
 
 
+
 bool Menu::mouseOnText4()
 {
     return  verdict4;
@@ -182,6 +183,8 @@ void Menu::drawmenu2()
     }
 
     DrawText("INPUT NAME AND PRESS ENTER", 260, 250, 20, LIGHTGRAY);
+
+
 }
 
 void Menu::drawmenu3()

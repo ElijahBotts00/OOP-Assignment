@@ -35,6 +35,7 @@ class Game
 
       void UpdateScore();
 
+
 private:
     void apply_rules();
 

@@ -39,7 +39,6 @@ void Apple::eaten()
 
 void Apple::position()
 {
-
 	x = (rand() % 20);
 	y = (rand() % 20);
 }

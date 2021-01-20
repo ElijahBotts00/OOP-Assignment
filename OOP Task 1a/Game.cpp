@@ -31,6 +31,8 @@ void Game::UpdateScore()
 }
 
 
+
+
                                             
 void Game::UpdateDirection(int key)
 {
@@ -112,7 +114,7 @@ bool Game::IsTailAtPosition(int x, int y)
 
 void Game::apply_rules()
 {
- 
+
 
     if (player.EatenApple(apple))
     {
@@ -122,38 +124,13 @@ void Game::apply_rules()
         i++;
         score = to_string(i);
        
-        if (IsWallAtPosition(apple.get_x(), apple.get_y()))
+        do
         {
-            apple.~Apple();            // destroy the old one first.
-            new (&apple) Apple();      // Call the constructor 
-        }
-        if (player.IsAtPosition(apple.get_x(), apple.get_y()))
-        {
-            apple.~Apple();            // destroy the old one first.
-            new (&apple) Apple();      // Call the constructor 
-        }
-        if (tail.IsAtPosition(apple.get_x(), apple.get_y()))
-        {
-            apple.~Apple();            // destroy the old one first.
-            new (&apple) Apple();      // Call the constructor 
-        }
+          apple.collected = false;
+          apple.position();
+        } while (IsWallAtPosition(apple.get_x(), apple.get_y()) || (player.IsAtPosition(apple.get_x(), apple.get_y()) || (tail.IsAtPosition(apple.get_x(), apple.get_y()))));
+   
     }
-    if (IsWallAtPosition(apple.get_x(), apple.get_y()))
-    {
-        apple.~Apple();            // destroy the old one first.
-        new (&apple) Apple();      // Call the constructor 
-    }
-    if (player.IsAtPosition(apple.get_x(), apple.get_y()))
-    {
-        apple.~Apple();            // destroy the old one first.
-        new (&apple) Apple();      // Call the constructor 
-    }
-    if (tail.IsAtPosition(apple.get_x(), apple.get_y()))
-    {
-        apple.~Apple();            // destroy the old one first.
-        new (&apple) Apple();      // Call the constructor 
-    }
-
 }
 
 bool Game::IsRunning()
