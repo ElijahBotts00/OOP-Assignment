@@ -31,6 +31,8 @@ class Game
       string get_end_reason();
       int scores();
       int score = 0;
+      string cname;
+      void UpdateScore();
 
 private:
     void apply_rules();

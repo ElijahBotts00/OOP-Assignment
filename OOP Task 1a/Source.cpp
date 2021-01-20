@@ -5,24 +5,19 @@
 #include <chrono>
 #include <thread>
 #include "Menu.h"
-
+#include <fstream>
 
 using namespace std;
 
-typedef enum {
-    STORAGE_POSITION_SCORE = 0,
-    STORAGE_POSITION_HISCORE = 1
-} StorageData;
-
 int main()
 {
-    //string score;
-    int hiScore = 0;
+    string topScores;
     InitWindow(900, 600, "OOP Assignment 1");
     SetTargetFPS(60);
     Game game;
     Menu menu;
     game.Setup();
+    ifstream MyReadFile("scores.txt");
 
     while (!WindowShouldClose())
     {
@@ -79,15 +74,19 @@ int main()
                 if (IsKeyPressed(KEY_LEFT))   game.UpdateDirection(KEY_LEFT);
                 if (IsKeyPressed(KEY_UP))     game.UpdateDirection(KEY_UP);
                 if (IsKeyPressed(KEY_DOWN))   game.UpdateDirection(KEY_DOWN);
-                DrawText(FormatText("Name: %s", name), 610, 10, 20, MAROON);
+                DrawText(FormatText("Name: %s", menu.name), 610, 10, 20, MAROON);
                 DrawText(TextFormat("SCORE: %i", game.score), 610, 30, 30, MAROON);
+                
             }
             else
             {
-                DrawText(FormatText("Name: %s", name), 610, 10, 20, MAROON);
+                DrawText(FormatText("Name: %s", menu.name), 610, 10, 20, MAROON);
                 DrawText(TextFormat("SCORE: %i", game.score), 610, 30, 30, MAROON);
-                DrawText(game.get_end_reason().c_str(), 610, 60, 20, LIGHTGRAY); //raylib
-                
+                DrawText(game.get_end_reason().c_str(), 610, 60, 20, LIGHTGRAY);
+                while (getline(MyReadFile, topScores)) {
+                    DrawText(topScores.c_str(), 610, 90, 20, LIGHTGRAY);
+                }
+                MyReadFile.close();
             }
 
             const int cellSize = (int)((float)GetScreenHeight() / (float)(SIZE));

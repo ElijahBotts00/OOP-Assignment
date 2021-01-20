@@ -138,10 +138,7 @@ void Game::apply_rules()
     {
 
         apple.eaten();
-        int i;
-        i = atoi(score.c_str());
-        i++;
-        score = to_string(i);
+        score++;
         Setup();
     }
 }
