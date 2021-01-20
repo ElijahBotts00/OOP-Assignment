@@ -8,6 +8,7 @@
 #include "Tail.h"
 #include "Apple.h"
 
+
 using namespace std;
 
 class Game
@@ -30,6 +31,9 @@ class Game
       string get_end_reason();
       string scores();
       string score = "0";
+      string cname;
+
+      void UpdateScore();
 
 private:
     void apply_rules();

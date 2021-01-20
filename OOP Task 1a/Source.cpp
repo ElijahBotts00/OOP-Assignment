@@ -6,6 +6,7 @@
 #include <thread>
 #include "Menu.h"
 
+
 using namespace std;
 
 int main()
@@ -26,6 +27,10 @@ int main()
         {
             menu.predraw2();
         }
+        if (menu.whichMenu() == 3)
+        {
+            menu.predraw3();
+        }
         BeginDrawing();
         if (menu.whichMenu() != 0)
         {
@@ -36,6 +41,10 @@ int main()
             if (menu.whichMenu() == 2)
             {
                 menu.drawmenu2();
+            }
+            if (menu.whichMenu() == 3)
+            {
+                menu.drawmenu3();
             }
             if (menu.whichMenu() == 4)
             {
@@ -49,7 +58,10 @@ int main()
             ClearBackground(DARKGRAY);
 
             if (game.IsRunning())
+               
             {
+                game.cname = menu.name;
+                
                 /// <summary>
                 /// Uses constant loop of game running to constantly update position of the snake in the direction of key input
                 /// On arrow key press direction is updated.
@@ -67,9 +79,12 @@ int main()
             }
             else
             {
+      
+              
                 DrawText(FormatText("Name: %s", menu.name), 610, 10, 20, MAROON);
                 DrawText(game.scores().c_str(), 610, 30, 30, MAROON);
                 DrawText(game.get_end_reason().c_str(), 610, 60, 20, LIGHTGRAY); //raylib
+                
             }
 
             const int cellSize = (int)((float)GetScreenHeight() / (float)(SIZE));
@@ -99,7 +114,11 @@ int main()
             }
         }
         EndDrawing();
+     
+  
     }
+
+        game.UpdateScore();
 
     CloseWindow();
     return 0;

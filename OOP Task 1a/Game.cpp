@@ -1,4 +1,6 @@
 #include "Game.h"
+#include <fstream>
+
 
 void Game::Setup()
 {
@@ -13,8 +15,22 @@ void Game::UpdatePossition()
     tail.Move(player.GetX(), player.GetY());
     player.Move();
    // cout << to_string(player.GetX()) + "*" + to_string(player.GetY()) + " ";
-    
 }
+void Game::UpdateScore()
+{
+
+    ofstream foutput;
+    ifstream finput;
+    finput.open("scores.txt");
+    foutput.open("scores.txt", ios::app);
+    if (finput.is_open())
+    foutput << cname << " " << score<< "\n";
+    finput.close();
+    foutput.close();
+
+}
+
+
                                             
 void Game::UpdateDirection(int key)
 {
@@ -96,6 +112,8 @@ bool Game::IsTailAtPosition(int x, int y)
 
 void Game::apply_rules()
 {
+ 
+
     if (player.EatenApple(apple))
     {
         apple.eaten();
@@ -103,6 +121,7 @@ void Game::apply_rules()
         i = atoi(score.c_str());
         i++;
         score = to_string(i);
+       
         if (IsWallAtPosition(apple.get_x(), apple.get_y()))
         {
             apple.~Apple();            // destroy the old one first.
@@ -134,7 +153,6 @@ void Game::apply_rules()
         apple.~Apple();            // destroy the old one first.
         new (&apple) Apple();      // Call the constructor 
     }
-
 
 }
 

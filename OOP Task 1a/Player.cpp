@@ -4,7 +4,6 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
-#include "game.h"
 
 using namespace std;
 
@@ -88,7 +87,7 @@ void Player::Move()
     {
         UpdatePosition(dx, dy);
     }
- 
+
     else
         alive = false;
 }
