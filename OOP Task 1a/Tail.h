@@ -16,6 +16,7 @@ public:
 	//assessors
 	char GetSymbol() const;
 	bool IsAtPosition(int x, int y);
+	void IncreaseTail();
 	string WhatIsXY(Tail);
 
 	//mutators

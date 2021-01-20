@@ -160,12 +160,10 @@ void Game::apply_rules()
         i = atoi(score.c_str());
         i++;
         score = to_string(i);
-        tail.Length++;
+        tail.IncreaseTail();
         Setup();
 
     }
-
-  
 }
 
 bool Game::IsRunning()
