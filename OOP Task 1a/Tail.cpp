@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Tail::Tail() : symbol(TAIL), x(0), y(0), Length(200)
+Tail::Tail() : symbol(TAIL), x(0), y(0), Length(6)
 {
 
 }
@@ -14,6 +14,8 @@ Tail::Tail(int x, int y)
 {
 
 }
+
+
 
 char Tail::GetSymbol() const
 {

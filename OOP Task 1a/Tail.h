@@ -25,6 +25,7 @@ public:
 	int Length;
 	vector<Tail> tailPosition;
 
+
 private:
 	//data members
 	char symbol;
