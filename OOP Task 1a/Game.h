@@ -30,13 +30,19 @@ class Game
       string eapple();
       string get_end_reason();
       string scores();
+      string applecoord();
+      string applecoord2();
       string score = "0";
+      string applecoor = "0";
+      string applecoor2 = "0";
       string cname;
-
       void UpdateScore();
+
 
 
 private:
     void apply_rules();
+    int appleX;
+    int appleY;
 
 };

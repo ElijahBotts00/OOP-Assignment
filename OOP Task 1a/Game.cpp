@@ -4,28 +4,36 @@
 
 void Game::Setup()
 {
-    do
-    {
-        if (IsWallAtPosition(apple.get_x(), apple.get_y()))
-        {
-            apple.collected = false;
-                apple.position();
-        }
 
-        if (player.IsAtPosition(apple.get_x(), apple.get_y()))
-        {
+    while (player.IsAtPosition(apple.get_x(), apple.get_y()))
+    {
+        apple.collected = false;
+        apple.position();
+
+        int i = 0;
+        i = apple.get_x();
+        applecoor = to_string(i);
+        int u = 0;
+        u = apple.get_y();
+        applecoor2 = to_string(u);
+  
+    }
+     while (IsTailAtPosition(apple.get_x(), apple.get_y()))
+     {
             apple.collected = false;
-                apple.position();
-        }
-            if (tail.IsAtPosition(apple.get_x(), apple.get_y()))
-            {
-                apple.collected = false;
-                apple.position();
-            }
-        
-   
-    } while (apple.collected == true);
+            apple.position();
+
+            int i = 0;
+            i = apple.get_x();
+            applecoor = to_string(i);
+            int u = 0;
+            u = apple.get_y();
+            applecoor2 = to_string(u);
+         
+      }
+
 }
+
 
 void Game::UpdatePossition()
 {
@@ -47,10 +55,6 @@ void Game::UpdateScore()
     foutput.close();
 
 }
-
-
-
-
                                             
 void Game::UpdateDirection(int key)
 {
@@ -133,10 +137,8 @@ bool Game::IsTailAtPosition(int x, int y)
 void Game::apply_rules()
 {
 
-
     if (player.EatenApple(apple))
     {
-
         apple.eaten();
         int i;
         i = atoi(score.c_str());
@@ -144,6 +146,8 @@ void Game::apply_rules()
         score = to_string(i);
         Setup();
     }
+
+  
 }
 
 bool Game::IsRunning()
@@ -180,4 +184,14 @@ string Game::get_end_reason()
 string Game::scores()
 {
     return score;
+}
+
+string Game::applecoord()
+{
+    return applecoor;
+}
+
+string Game::applecoord2()
+{
+    return applecoor2;
 }

@@ -18,10 +18,10 @@ public:
 	void eaten();
 	bool collected;
 
-
 private:
 	// data members
 	char symbol;
+
 	int x, y;
 	bool is_at_position(int x, int y);
 

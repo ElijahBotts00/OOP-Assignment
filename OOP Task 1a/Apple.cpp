@@ -2,9 +2,10 @@
 
 
 
-Apple::Apple() : symbol(APPLE), x(0), y(0), collected(true)
+
+Apple::Apple() : symbol(APPLE), x(0), y(0), collected(false)
 {
-	
+	position();
 }
 
 int Apple::get_x()
@@ -39,7 +40,8 @@ void Apple::eaten()
 
 void Apple::position()
 {
-	x = (rand() % 20);
-	y = (rand() % 20);
+
+	x = (rand() % 20)  + 1;
+	y = (rand() % 20) + 1;
 }
 

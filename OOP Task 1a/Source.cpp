@@ -74,6 +74,8 @@ int main()
                 if (IsKeyPressed(KEY_DOWN))   game.UpdateDirection(KEY_DOWN);
                 DrawText(FormatText("Name: %s", menu.name), 610, 10, 20, MAROON);
                 DrawText(game.scores().c_str(), 610, 30, 30, MAROON);
+                DrawText(game.applecoord().c_str(), 610, 60, 40, MAROON);
+                DrawText(game.applecoord2().c_str(), 660, 60, 40, MAROON);
                 /////
                 /////
             }
@@ -83,6 +85,7 @@ int main()
               
                 DrawText(FormatText("Name: %s", menu.name), 610, 10, 20, MAROON);
                 DrawText(game.scores().c_str(), 610, 30, 30, MAROON);
+                DrawText(game.applecoord().c_str(), 610, 40, 40, MAROON);
                 DrawText(game.get_end_reason().c_str(), 610, 60, 20, LIGHTGRAY); //raylib
                 
             }
