@@ -15,7 +15,7 @@ public:
     void drawmenu2();
     void drawmenu3();
     char name[15 + 1] = "\0";
-
+    int mnum = 1;
 
 private:
 
@@ -35,6 +35,5 @@ private:
     bool verdict2;
     bool verdict3;
     bool verdict4;
-    int mnum = 1;
- 
+
 };

@@ -59,6 +59,7 @@ void Menu::predraw3()
         {
             if (letterCount > 0)
                 mnum = 0;
+    
 
         }
     }
@@ -99,6 +100,7 @@ void Menu::predraw2()
         {
             if (letterCount > 0)
                 mnum = 0;
+          
 
         }
     }
