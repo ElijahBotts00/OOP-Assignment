@@ -50,6 +50,7 @@ mylabel:
                     break;
                 case 5:
                     game.LoadGame();
+                 
                     menu.mnum = 0;
                     break;
                 }
@@ -114,6 +115,7 @@ mylabel:
                         DrawRectangleLines(x * cellSize, y * cellSize, cellSize, cellSize, DARKGRAY);
                     }
                 }
+       
             }
             if (!game.IsRunning() && menu.mnum == 0)
             {

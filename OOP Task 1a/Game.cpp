@@ -51,6 +51,7 @@ void Game::UpdateScore()
                                             
 void Game::UpdateDirection(int key)
 {
+    conti = false;
     player.GetDirection(key);
 }
 
@@ -78,10 +79,6 @@ vector<vector<char>> Game::PrepareGrid()
                 {
                     line.push_back(player.GetSymbol());
                 }
-                else if (IsTailAtPosition(col, row))
-                {
-                    line.push_back(TAIL);
-                }
                 else if ((row == sgappleY && col == sgappleX && apple.collected != true))
                 {
                     line.push_back(apple.get_symbol());
@@ -94,8 +91,9 @@ vector<vector<char>> Game::PrepareGrid()
                 {
                     line.push_back(FLOOR);
                 }
+               
             }
-            else
+            if (conti == false)
             {
 
                 if (row == player.GetY() && col == player.GetX())
@@ -156,7 +154,7 @@ bool Game::IsTailAtPosition(int x, int y)
 
 void Game::apply_rules()
 {
-
+ 
     if (player.EatenApple(apple))
     {
         apple.eaten();
