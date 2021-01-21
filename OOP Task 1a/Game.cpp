@@ -78,6 +78,10 @@ vector<vector<char>> Game::PrepareGrid()
                 {
                     line.push_back(player.GetSymbol());
                 }
+                else if (IsTailAtPosition(col, row))
+                {
+                    line.push_back(TAIL);
+                }
                 else if ((row == sgappleY && col == sgappleX && apple.collected != true))
                 {
                     line.push_back(apple.get_symbol());
@@ -92,26 +96,28 @@ vector<vector<char>> Game::PrepareGrid()
                 }
             }
             else
+            {
 
-            if (row == player.GetY() && col == player.GetX())
-            {
-                line.push_back(player.GetSymbol());
-            }
-            else if (IsTailAtPosition(col, row))
-            {
-                line.push_back(TAIL);
-            }
-            else if ((row == apple.get_y() && col == apple.get_x() && apple.collected != true))
-            {
-                line.push_back(apple.get_symbol());
-            }
-            else if (IsWallAtPosition(col, row))
-            {
-                line.push_back(WALL);
-            }
-            else
-            {
-                line.push_back(FLOOR);
+                if (row == player.GetY() && col == player.GetX())
+                {
+                    line.push_back(player.GetSymbol());
+                }
+                else if (IsTailAtPosition(col, row))
+                {
+                    line.push_back(TAIL);
+                }
+                else if ((row == apple.get_y() && col == apple.get_x() && apple.collected != true))
+                {
+                    line.push_back(apple.get_symbol());
+                }
+                else if (IsWallAtPosition(col, row))
+                {
+                    line.push_back(WALL);
+                }
+                else
+                {
+                    line.push_back(FLOOR);
+                }
             }
         }
 
@@ -216,17 +222,17 @@ void Game::LoadGame()
         ++i;
      }
     
-    if (sscanf_s(load[5].c_str(), "%d", &sgplayerX) != 1)
-    if (sscanf_s(load[4].c_str(), "%d", &sgplayerY) != 1)
-    if (sscanf_s(load[2].c_str(), "%d", &sgappleX) != 1)
-    if (sscanf_s(load[3].c_str(), "%d", &sgappleY) != 1)
+    if (sscanf_s(load[5].c_str(), "%d", &sgplayerX) != 1);
+        if (sscanf_s(load[4].c_str(), "%d", &sgplayerY) != 1);
+            if (sscanf_s(load[2].c_str(), "%d", &sgappleX) != 1);
+                if (sscanf_s(load[3].c_str(), "%d", &sgappleY) != 1);
     sgname = load[0];
     scoreload = load[1];
 
     conti = true;
 
 
-    cout << temp;
+    cout << sgname;
 
 }
 
