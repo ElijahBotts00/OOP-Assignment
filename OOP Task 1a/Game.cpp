@@ -229,8 +229,12 @@ void Game::LoadGame()
 
     conti = true;
 
+    apple.x = sgappleX;
+    apple.y = sgappleY;
+    player.x = sgplayerX;
+    player.y = sgplayerY;
+    score = scoreload;
 
-    cout << sgname;
 
 }
 
