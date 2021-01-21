@@ -50,7 +50,7 @@ mylabel:
                     break;
                 case 5:
                     game.LoadGame();
-                 
+                    game.continame = true;
                     menu.mnum = 0;
                     break;
                 }
@@ -62,12 +62,6 @@ mylabel:
 
                 {
                     game.cname = menu.name;
-                    if (game.conti == true)
-                    {
-                       
-                    }
-
-
                     /// <summary>
                     /// Uses constant loop of game running to constantly update position of the snake in the direction of key input
                     /// On arrow key press direction is updated.
@@ -78,8 +72,16 @@ mylabel:
                     if (IsKeyPressed(KEY_LEFT))   game.UpdateDirection(KEY_LEFT);
                     if (IsKeyPressed(KEY_UP))     game.UpdateDirection(KEY_UP);
                     if (IsKeyPressed(KEY_DOWN))   game.UpdateDirection(KEY_DOWN);
-                    if (IsKeyPressed(KEY_S)) { game.SaveGame(); DrawText("GAME SAVED", 610, 60, 20, LIGHTGRAY); } 
-                    DrawText(FormatText("Name: %s", menu.name), 610, 10, 20, MAROON);
+                    if (IsKeyPressed(KEY_S)) { game.SaveGame(); DrawText("GAME SAVED", 610, 60, 20, LIGHTGRAY); }
+                    if (game.continame == true)
+                    {
+                        DrawText(FormatText("Name: %s", game.sname), 610, 10, 20, MAROON);
+                    }
+                   
+                    else
+                    {
+                        DrawText(FormatText("Name: %s", menu.name), 610, 10, 20, MAROON);
+                    }
                     DrawText(game.scores().c_str(), 610, 30, 30, MAROON);
                     /////
                     /////

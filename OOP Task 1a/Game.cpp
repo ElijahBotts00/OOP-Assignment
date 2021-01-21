@@ -23,8 +23,6 @@ void Game::Setup()
          apple.collected = false;
          apple.position();
      }
-
-
 }
 
 
@@ -229,12 +227,15 @@ void Game::LoadGame()
 
     conti = true;
 
+
+
     apple.x = sgappleX;
     apple.y = sgappleY;
     player.x = sgplayerX;
     player.y = sgplayerY;
     score = scoreload;
 
+    strcpy_s(sname, sgname.c_str());
 
 }
 

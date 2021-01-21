@@ -41,6 +41,8 @@ class Game
       string sgname;
       string scoreload;
       bool conti;
+      char sname[15 + 1] = "\0";
+      bool continame = false;
 
 private:
     void apply_rules();
