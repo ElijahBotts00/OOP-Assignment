@@ -35,13 +35,12 @@ void Game::UpdatePossition()
 }
 void Game::UpdateScore()
 {
-
     ofstream foutput;
     ifstream finput;
     finput.open("scores.txt");
     foutput.open("scores.txt", ios::app);
     if (finput.is_open())
-    foutput << cname << " " << score<< "\n";
+    foutput << cname << "\n" << score<< "\n";
     finput.close();
     foutput.close();
 
@@ -197,17 +196,15 @@ void Game::LoadGame()
 {
     int number = 0;
     string temp;
-    ifstream myFile_Handler;
-
-    myFile_Handler.open("save.txt");
-
-    if (myFile_Handler.is_open())
+    ifstream Handler;
+    Handler.open("save.txt");
+    if (Handler.is_open())
     {
-        while (getline(myFile_Handler, temp))
+        while (getline(Handler, temp))
         {
                 number++;
         }
-        myFile_Handler.close();
+        Handler.close();
     }
 
     string load[6];
@@ -227,16 +224,18 @@ void Game::LoadGame()
 
     conti = true;
 
+    int scoretemp;
     apple.x = sgappleX;
     apple.y = sgappleY;
     player.x = sgplayerX;
     player.y = sgplayerY;
     score = scoreload;
 
+    if (sscanf_s(score.c_str(), "%d", &scoretemp) != 1)
+
     strcpy_s(sname, sgname.c_str());
 
-
-
+    tail.Length = scoretemp;
 }
 
 string Game::eapple()

@@ -137,14 +137,17 @@ mylabel:
             }
             if (!game.IsRunning() && menu.mnum == 0)
             {
+ 
                 DrawText("PRESS Y/N TO GO TO MENU!", 200, 200, 40, YELLOW); //raylib
                 if (IsKeyPressed(KEY_Y))
                 {
+                    game.UpdateScore();
                     menu.mnum = 1;
                     goto mylabel;
                 }
                 if (IsKeyPressed(KEY_N))
                 {
+                    game.UpdateScore();
                     CloseWindow();
                     return 0;
                 }
@@ -153,7 +156,7 @@ mylabel:
 
     }
 
-        game.UpdateScore();
+     
 
     CloseWindow();
     return 0;
