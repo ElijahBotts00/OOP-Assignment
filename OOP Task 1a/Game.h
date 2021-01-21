@@ -44,6 +44,8 @@ class Game
       char sname[15 + 1] = "\0";
       bool continame = false;
 
+      bool gpause = false;
+
 private:
     void apply_rules();
     bool IsTailAtPosition(int x, int y);

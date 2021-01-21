@@ -67,12 +67,23 @@ mylabel:
                     /// On arrow key press direction is updated.
                     /// ---Fergus
                     /// </summary>
-                    game.UpdatePossition();
+                    if (game.gpause == false)
+                    {
+                        game.UpdatePossition();
+                    }
                     if (IsKeyPressed(KEY_RIGHT))  game.UpdateDirection(KEY_RIGHT);
                     if (IsKeyPressed(KEY_LEFT))   game.UpdateDirection(KEY_LEFT);
                     if (IsKeyPressed(KEY_UP))     game.UpdateDirection(KEY_UP);
                     if (IsKeyPressed(KEY_DOWN))   game.UpdateDirection(KEY_DOWN);
                     if (IsKeyPressed(KEY_S)) { game.SaveGame(); DrawText("GAME SAVED", 610, 60, 20, LIGHTGRAY); }
+                    if (IsKeyPressed(KEY_P)) {
+                        if (IsKeyPressed(KEY_P)) {
+                            if (game.gpause == true) { game.gpause = false; }
+                            else { game.gpause = true; }
+                        }
+                    }
+                    if (IsKeyPressed(KEY_O)) { game.gpause = false; }
+           
                     if (game.continame == true)
                     {
                         DrawText(FormatText("Name: %s", game.sname), 610, 10, 20, MAROON);
@@ -85,15 +96,15 @@ mylabel:
                     DrawText(game.scores().c_str(), 610, 30, 30, MAROON);
                     /////
                     /////
+                    DrawText("PRESS S TO SAVE", 610, 100, 20, LIGHTGRAY);
+                    DrawText("PRESS P TO PAUSE", 610, 120, 20, LIGHTGRAY);
                 }
                 else
                 {
-
-
                     DrawText(FormatText("Name: %s", menu.name), 610, 10, 20, MAROON);
                     DrawText(game.scores().c_str(), 610, 30, 30, MAROON);
                     DrawText(game.get_end_reason().c_str(), 610, 60, 20, LIGHTGRAY); //raylib
-
+               
 
                 }
 

@@ -218,16 +218,14 @@ void Game::LoadGame()
         ++i;
      }
     
-    if (sscanf_s(load[5].c_str(), "%d", &sgplayerX) != 1);
-        if (sscanf_s(load[4].c_str(), "%d", &sgplayerY) != 1);
+    if (sscanf_s(load[5].c_str(), "%d", &sgplayerY) != 1);
+        if (sscanf_s(load[4].c_str(), "%d", &sgplayerX) != 1);
             if (sscanf_s(load[2].c_str(), "%d", &sgappleX) != 1);
                 if (sscanf_s(load[3].c_str(), "%d", &sgappleY) != 1);
     sgname = load[0];
     scoreload = load[1];
 
     conti = true;
-
-
 
     apple.x = sgappleX;
     apple.y = sgappleY;
@@ -236,6 +234,8 @@ void Game::LoadGame()
     score = scoreload;
 
     strcpy_s(sname, sgname.c_str());
+
+
 
 }
 
