@@ -61,6 +61,7 @@ mylabel:
                 if (game.IsRunning())
 
                 {
+     
                     game.cname = menu.name;
                     /// <summary>
                     /// Uses constant loop of game running to constantly update position of the snake in the direction of key input

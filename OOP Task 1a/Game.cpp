@@ -151,6 +151,7 @@ bool Game::IsTailAtPosition(int x, int y)
 
 void Game::apply_rules()
 {
+
  
     if (player.EatenApple(apple))
     {
@@ -167,6 +168,10 @@ void Game::apply_rules()
 
 bool Game::IsRunning()
 {
+    if (IsTailAtPosition(player.GetX(), player.GetY()))
+    {
+        return false;
+    }
     if (IsWallAtPosition(player.GetX(), player.GetY()))
     {
         return false;
@@ -175,6 +180,107 @@ bool Game::IsRunning()
     // maybe it's when the player runs out of moves, maybe it's when they get caught, it's up to you!
     return player.isalive();
 }
+
+/*void Game::updateHS()
+{
+    //Stores the values from current highscore so they can be checked against the new score
+    string Name1, Name2, Name3, Name4, Name5, NewName;
+    int Score1, Score2, Score3, Score4, Score5, NewScore;
+
+    vector <int> Scores;
+
+    // Create a text string, which is used to output the text file
+
+
+    int number = 0;
+    string temp[10];
+    ifstream Handler;
+    Handler.open("save.txt");
+    if (Handler.is_open())
+    {
+
+        for (int i = 0; i < 10; i++)
+        {
+            getline(Handler, temp[i]);
+            number++;
+        }
+
+        Handler.close();
+    }
+
+    string load[10];
+    int i = 0;
+    stringstream ssin(temp[i]);
+    while (ssin.good() && i < 10) {
+        ssin >> load[i];
+        ++i;
+    }
+
+
+
+    Name1 = load[0];
+    if (sscanf_s(load[1].c_str(), "%d", &Score1) != 1);
+    Name2 = load[2];
+    if (sscanf_s(load[3].c_str(), "%d", &Score2) != 1);
+    Name3 = load[4];
+    if (sscanf_s(load[5].c_str(), "%d", &Score3) != 1);
+    Name4 = load[6];
+    if (sscanf_s(load[7].c_str(), "%d", &Score4) != 1);
+    Name5 = load[8];
+    if (sscanf_s(load[9].c_str(), "%d", &Score5) != 1);
+
+
+    cout << load[3];
+
+    /*
+    for (int i = 0; i < Names.size(); i++)
+        std::cout << Names.at(i) << ' ';
+
+    cout << " ** ";
+
+    for (int i = 0; i < Scores.size(); i++)
+        std::cout << Scores.at(i) << ' ';
+
+
+    ofstream foutput;
+    ifstream finput;
+    finput.open("scores.txt");
+    foutput.open("scores.txt", ios::app);
+    if (finput.is_open())
+    foutput << cname << " " << score<< "\n";
+    finput.close();
+    foutput.close();
+    */
+
+
+    /*int number = 0;
+    string temp[20];
+    ifstream Handler;
+    Handler.open("save.txt");
+    if (Handler.is_open())
+    {
+
+        for (int i = 0; i < 10; i++)
+        {
+            getline(Handler, temp[i]);
+            number++;
+        }
+
+        Handler.close();
+    }
+
+    string load[10];
+    int i = 0;
+    stringstream ssin(temp[10]);
+    while (ssin.good() && i < 10) {
+        ssin >> load[i];
+        ++i;
+    }
+
+}*/
+        
+
+
 
 void Game::SaveGame()
 {
@@ -247,7 +353,7 @@ string Game::eapple()
 string Game::get_end_reason()
 {
 
-    return "You hit a wall!";
+    return "You died!";
 }
 
 string Game::scores()

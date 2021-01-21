@@ -46,6 +46,8 @@ class Game
 
       bool gpause = false;
 
+      void updateHS();
+
 private:
     void apply_rules();
     bool IsTailAtPosition(int x, int y);
