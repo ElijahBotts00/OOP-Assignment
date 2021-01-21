@@ -3,10 +3,27 @@ bob 24
 ditto 12
 christopher 12
 bob 24 
+christopher 1 0
 christopher 1
 bob 24 
 ditto 12
 christopher 12
-bob 24  0
+bob 24 
+christopher 1 0
  0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+chris 0
+chris 0
+ 0
+chris 3
  0

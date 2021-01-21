@@ -11,40 +11,16 @@ void Game::Setup()
     {
         apple.collected = false;
         apple.position();
-
-        int i = 0;
-        i = apple.get_x();
-        applecoor = to_string(i);
-        int u = 0;
-        u = apple.get_y();
-        applecoor2 = to_string(u);
-  
     }
      while (IsTailAtPosition(apple.get_x(), apple.get_y()))
      {
             apple.collected = false;
             apple.position();
-
-            int i = 0;
-            i = apple.get_x();
-            applecoor = to_string(i);
-            int u = 0;
-            u = apple.get_y();
-            applecoor2 = to_string(u);
-         
       }
      while (IsWallAtPosition(apple.get_x(), apple.get_y()))
      {
          apple.collected = false;
          apple.position();
-
-         int i = 0;
-         i = apple.get_x();
-         applecoor = to_string(i);
-         int u = 0;
-         u = apple.get_y();
-         applecoor2 = to_string(u);
-
      }
 
 
@@ -200,14 +176,4 @@ string Game::get_end_reason()
 string Game::scores()
 {
     return score;
-}
-
-string Game::applecoord()
-{
-    return applecoor;
-}
-
-string Game::applecoord2()
-{
-    return applecoor2;
 }

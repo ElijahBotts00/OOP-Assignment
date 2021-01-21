@@ -8,33 +8,39 @@ class Menu
 public:
 
     int whichMenu();
-    void predraw();
-    void predraw2();
-    void predraw3();
+    void predrawmenu();
+    void predrawngmenu();
+    void predrawhsmenu();
     void drawmenu();
-    void drawmenu2();
-    void drawmenu3();
+    void drawngmenu();
+    void drawhsmenu();
     char name[15 + 1] = "\0";
     char highScore[15 + 1] = "\0";
     int mnum = 1;
 
 private:
 
-    Rectangle newGame = { 430, 350, 150, 20 };
-    Rectangle highscores = { 430, 390, 150, 20 };
-    Rectangle exitGame = { 430, 410, 150, 20 };
+    const Rectangle newGame = { 430, 350, 150, 20 };
+    const Rectangle highscores = { 430, 390, 150, 20 };
+    const Rectangle ngback = { 630, 410, 150, 20 };
+    const Rectangle exitGame = { 430, 410, 150, 20 };
+    const Rectangle exitHighscore = { 630, 410, 150, 20 };
     const char MAX = 15;
-    Texture2D texture = LoadTexture("snakes.png");
+    const Texture2D texture = LoadTexture("snakes.png");
     int letterCount = 0;
-    Rectangle entername = { 260, 280, 340, 60 };
+    const Rectangle entername = { 260, 280, 340, 60 };
     int framesCounter = 0;
-    bool mouseOnText4();
-    bool mouseOnText2();
-    bool mouseOnText3();
+    bool mouseOnBack();
+    bool mouseOnExit();
+    bool mouseOnNewGame();
+    bool mouseOnhighScores();
     bool mouseOnText();
+    bool mouseOnNgBack();
+    bool ngbool;
+    bool ngbbool;
     bool verdict;
-    bool verdict2;
-    bool verdict3;
-    bool verdict4;
+    bool hsbool;
+    bool egbool;
+    bool ehsbool;
 
 };

@@ -4,22 +4,29 @@
 using namespace std;
 
 
-
-bool Menu::mouseOnText4()
+bool Menu::mouseOnBack()
 {
-    return  verdict4;
+    return  ehsbool;
 }
-bool Menu::mouseOnText2()
+bool Menu::mouseOnNgBack()
 {
-    return  verdict;
+    return  ngbbool;
+}
+bool Menu::mouseOnExit()
+{
+    return  egbool;
+}
+bool Menu::mouseOnNewGame()
+{
+    return  ngbool;
 }
 bool Menu::mouseOnText()
 {
-    return  verdict2;
+    return  verdict;
 }
-bool Menu::mouseOnText3()
+bool Menu::mouseOnhighScores()
 {
-    return  verdict3;
+    return  hsbool;
 }
 
 int Menu::whichMenu()
@@ -27,13 +34,21 @@ int Menu::whichMenu()
     return mnum;
 }
 
-void Menu::predraw3()
+void Menu::predrawhsmenu()
 {
- 
+    if (CheckCollisionPointRec(GetMousePosition(), exitHighscore)) ehsbool = true;
+    else ehsbool = false;
+    if (ehsbool) framesCounter++;
+    else framesCounter = 0;
 }
 
-void Menu::predraw2()
+void Menu::predrawngmenu()
 {
+    if (CheckCollisionPointRec(GetMousePosition(), ngback)) ngbbool = true;
+    else ngbbool = false;
+    if (ngbbool) framesCounter++;
+    else framesCounter = 0;
+
     if (mouseOnText())
     {
 
@@ -64,30 +79,28 @@ void Menu::predraw2()
         {
             if (letterCount > 0)
                 mnum = 0;
-          
-
         }
     }
-
     if (mouseOnText()) framesCounter++;
     else framesCounter = 0;
 }
 
-void Menu::predraw()
+void Menu::predrawmenu()
 {
-    if (CheckCollisionPointRec(GetMousePosition(), newGame)) verdict = true;
-    else verdict = false;
-    if (verdict) framesCounter++;
+
+    if (CheckCollisionPointRec(GetMousePosition(), newGame)) ngbool = true;
+    else ngbool = false;
+    if (ngbool) framesCounter++;
     else framesCounter = 0;
 
-    if (CheckCollisionPointRec(GetMousePosition(), exitGame)) verdict4 = true;
-    else verdict4 = false;
-    if (verdict4) framesCounter++;
+    if (CheckCollisionPointRec(GetMousePosition(), exitGame)) egbool = true;
+    else egbool = false;
+    if (egbool) framesCounter++;
     else framesCounter = 0;
 
-    if (CheckCollisionPointRec(GetMousePosition(), highscores)) verdict3 = true;
-    else verdict3 = false;
-    if (verdict3) framesCounter++;
+    if (CheckCollisionPointRec(GetMousePosition(), highscores)) hsbool = true;
+    else hsbool = false;
+    if (hsbool) framesCounter++;
     else framesCounter = 0;
 }
 
@@ -96,7 +109,7 @@ void Menu::drawmenu()
     ClearBackground(BLACK);
     DrawText("SNAKE V1.0", 360, 50, 20, LIGHTGRAY);
     DrawTexture(texture, texture.width / 2, texture.height / 10, WHITE);
-    if (mouseOnText2()) {
+    if (mouseOnNewGame()) {
         DrawText(": NEW GAME", 430, 350, 20, RED);
         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
         {
@@ -108,7 +121,7 @@ void Menu::drawmenu()
     DrawText(": CONTINUE", 430, 370, 20, LIGHTGRAY);
 
     DrawText(": HIGH SCORES", 430, 390, 20, LIGHTGRAY);
-    if (mouseOnText3()) {
+    if (mouseOnhighScores()) {
         DrawText(": HIGH SCORES", 430, 390, 20, RED);
         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
         {
@@ -118,7 +131,7 @@ void Menu::drawmenu()
     else  DrawText(": HIGH SCORES", 430, 390, 20, WHITE);
 
 
-    if (mouseOnText4()) {
+    if (mouseOnExit()) {
         DrawText(": EXIT", 430, 410, 20, RED);
         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
         {
@@ -129,7 +142,7 @@ void Menu::drawmenu()
 
 }
 
-void Menu::drawmenu2()
+void Menu::drawngmenu()
 {
     ClearBackground(BLACK);
     DrawText("SNAKE V1.0", 360, 50, 20, LIGHTGRAY);
@@ -150,10 +163,17 @@ void Menu::drawmenu2()
 
     DrawText("INPUT NAME AND PRESS ENTER", 260, 250, 20, LIGHTGRAY);
 
-
+    if (mouseOnNgBack()) {
+        DrawText(": BACK", 630, 410, 20, RED);
+        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+        {
+            mnum = 1;
+        }
+    }
+    else  DrawText(": BACK", 630, 410, 20, WHITE);
 }
 
-void Menu::drawmenu3()
+void Menu::drawhsmenu()
 {
     ClearBackground(BLACK);
     DrawText("SNAKE V1.0", 360, 50, 20, LIGHTGRAY);
@@ -167,7 +187,9 @@ void Menu::drawmenu3()
     {
         while (getline(myFile_Handler, temp[numberOfStrings]))
         {
-            numberOfStrings++;
+            if (numberOfStrings < 10) {
+                numberOfStrings++;
+            }
         }
         myFile_Handler.close();
     }
@@ -179,6 +201,15 @@ void Menu::drawmenu3()
         DrawText(highScore, 260, height, 20, LIGHTGRAY);
         height = height + 20;
     }
+
+    if (mouseOnBack()) {
+        DrawText(": BACK", 630, 410, 20, RED);
+        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+        {
+            mnum = 1;
+        }
+    }
+    else  DrawText(": BACK", 630, 410, 20, WHITE);
 }
 
 

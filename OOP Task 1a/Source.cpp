@@ -18,17 +18,18 @@ mylabel:
     Game game;
     Menu menu;
     game.Setup();
-
     while (!WindowShouldClose())
     {
+   
            switch (menu.whichMenu()) {
         case 1:
-            menu.predraw();
+            menu.predrawmenu();
             break;
         case 2:
-            menu.predraw2();
+            menu.predrawngmenu();
+            break;
         case 3:
-            menu.predraw3();
+            menu.predrawhsmenu();
             break;
         }
             if (menu.whichMenu() != 0)
@@ -38,9 +39,10 @@ mylabel:
                     menu.drawmenu();
                     break;
                 case 2:
-                    menu.drawmenu2();
+                    menu.drawngmenu();
+                    break;
                 case 3:
-                    menu.drawmenu3();
+                    menu.drawhsmenu();
                     break;
                 case 4:
                     CloseWindow();
@@ -50,7 +52,6 @@ mylabel:
             else
             {
                 ClearBackground(DARKGRAY);
-
                 if (game.IsRunning())
 
                 {
@@ -68,8 +69,6 @@ mylabel:
                     if (IsKeyPressed(KEY_DOWN))   game.UpdateDirection(KEY_DOWN);
                     DrawText(FormatText("Name: %s", menu.name), 610, 10, 20, MAROON);
                     DrawText(game.scores().c_str(), 610, 30, 30, MAROON);
-                    DrawText(game.applecoord().c_str(), 610, 60, 40, MAROON);
-                    DrawText(game.applecoord2().c_str(), 660, 60, 40, MAROON);
                     /////
                     /////
                 }
@@ -79,7 +78,6 @@ mylabel:
 
                     DrawText(FormatText("Name: %s", menu.name), 610, 10, 20, MAROON);
                     DrawText(game.scores().c_str(), 610, 30, 30, MAROON);
-                    DrawText(game.applecoord().c_str(), 610, 40, 40, MAROON);
                     DrawText(game.get_end_reason().c_str(), 610, 60, 20, LIGHTGRAY); //raylib
 
 

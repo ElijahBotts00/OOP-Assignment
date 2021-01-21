@@ -23,15 +23,11 @@ class Game
       void UpdateDirection(int key);
       vector<vector<char>> PrepareGrid();
       bool IsRunning();
-      bool IsWallAtPosition(int x, int y);
       bool Menu();
-      bool IsTailAtPosition(int x, int y);
       int name;
       string eapple();
       string get_end_reason();
       string scores();
-      string applecoord();
-      string applecoord2();
       string score = "0";
       string applecoor = "0";
       string applecoor2 = "0";
@@ -42,7 +38,7 @@ class Game
 
 private:
     void apply_rules();
-    int appleX;
-    int appleY;
+    bool IsTailAtPosition(int x, int y);
+    bool IsWallAtPosition(int x, int y);
 
 };
