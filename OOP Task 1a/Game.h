@@ -23,18 +23,24 @@ class Game
       void UpdateDirection(int key);
       vector<vector<char>> PrepareGrid();
       bool IsRunning();
-      bool Menu();
-      int name;
       string eapple();
       string get_end_reason();
       string scores();
       string score = "0";
-      string applecoor = "0";
-      string applecoor2 = "0";
-      string cname;
+      string cname; /* copy of name */
       void UpdateScore();
 
 
+      /* test */
+      void LoadGame();
+      void SaveGame();
+      int sgplayerX;
+      int sgplayerY;
+      int sgappleX;
+      int sgappleY;
+      string sgname;
+      string scoreload;
+      bool conti;
 
 private:
     void apply_rules();

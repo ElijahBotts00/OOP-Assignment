@@ -28,6 +28,12 @@ bool Menu::mouseOnhighScores()
 {
     return  hsbool;
 }
+bool Menu::mouseOnContinue()
+{
+    return  cbool;
+}
+
+
 
 int Menu::whichMenu()
 {
@@ -98,9 +104,15 @@ void Menu::predrawmenu()
     if (egbool) framesCounter++;
     else framesCounter = 0;
 
+
     if (CheckCollisionPointRec(GetMousePosition(), highscores)) hsbool = true;
     else hsbool = false;
     if (hsbool) framesCounter++;
+    else framesCounter = 0;
+
+    if (CheckCollisionPointRec(GetMousePosition(), continRect)) cbool = true;
+    else cbool = false;
+    if (cbool) framesCounter++;
     else framesCounter = 0;
 }
 
@@ -118,9 +130,16 @@ void Menu::drawmenu()
     }
     else  DrawText(": NEW GAME", 430, 350, 20, WHITE);
 
-    DrawText(": CONTINUE", 430, 370, 20, LIGHTGRAY);
 
-    DrawText(": HIGH SCORES", 430, 390, 20, LIGHTGRAY);
+    if (mouseOnContinue()) {
+        DrawText(": CONTINUE", 430, 370, 20, RED);
+        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+        {
+            mnum = 5;
+        }
+    }
+    else      DrawText(": CONTINUE", 430, 370, 20, WHITE);
+
     if (mouseOnhighScores()) {
         DrawText(": HIGH SCORES", 430, 390, 20, RED);
         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))

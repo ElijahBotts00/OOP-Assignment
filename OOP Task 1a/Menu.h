@@ -25,6 +25,7 @@ private:
     const Rectangle ngback = { 630, 410, 150, 20 };
     const Rectangle exitGame = { 430, 410, 150, 20 };
     const Rectangle exitHighscore = { 630, 410, 150, 20 };
+    const Rectangle continRect = { 430, 370, 150, 20 };
     const char MAX = 15;
     const Texture2D texture = LoadTexture("snakes.png");
     int letterCount = 0;
@@ -33,6 +34,7 @@ private:
     bool mouseOnBack();
     bool mouseOnExit();
     bool mouseOnNewGame();
+    bool mouseOnContinue();
     bool mouseOnhighScores();
     bool mouseOnText();
     bool mouseOnNgBack();
@@ -42,5 +44,6 @@ private:
     bool hsbool;
     bool egbool;
     bool ehsbool;
+    bool cbool;
 
 };

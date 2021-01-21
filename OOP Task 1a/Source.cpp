@@ -47,6 +47,11 @@ mylabel:
                 case 4:
                     CloseWindow();
                     return 0;
+                    break;
+                case 5:
+                    game.LoadGame();
+                    menu.mnum = 0;
+                    break;
                 }
             }
             else
@@ -67,6 +72,7 @@ mylabel:
                     if (IsKeyPressed(KEY_LEFT))   game.UpdateDirection(KEY_LEFT);
                     if (IsKeyPressed(KEY_UP))     game.UpdateDirection(KEY_UP);
                     if (IsKeyPressed(KEY_DOWN))   game.UpdateDirection(KEY_DOWN);
+                    if (IsKeyPressed(KEY_S))      game.SaveGame();
                     DrawText(FormatText("Name: %s", menu.name), 610, 10, 20, MAROON);
                     DrawText(game.scores().c_str(), 610, 30, 30, MAROON);
                     /////

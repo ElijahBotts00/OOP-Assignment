@@ -1,5 +1,6 @@
 #include "Game.h"
 #include <fstream>
+#include <sstream>
 
 
 void Game::Setup()
@@ -71,6 +72,27 @@ vector<vector<char>> Game::PrepareGrid()
         // for each column, work out what's in that position and add the relevant char to the 2D grid
         for (int col = 1; col <= SIZE; ++col)
         {
+            if (conti == true)
+            {
+                if (row == sgplayerY && col == sgplayerX)
+                {
+                    line.push_back(player.GetSymbol());
+                }
+                else if ((row == sgappleY && col == sgappleX && apple.collected != true))
+                {
+                    line.push_back(apple.get_symbol());
+                }
+                else if (IsWallAtPosition(col, row))
+                {
+                    line.push_back(WALL);
+                }
+                else
+                {
+                    line.push_back(FLOOR);
+                }
+            }
+            else
+
             if (row == player.GetY() && col == player.GetX())
             {
                 line.push_back(player.GetSymbol());
@@ -153,14 +175,61 @@ bool Game::IsRunning()
     return player.isalive();
 }
 
-bool Game::Menu()
+void Game::SaveGame()
 {
-    if (name == 0)
-        return true;
+    std::ofstream ofs;
+    ofs.open("save.txt", std::ofstream::out | std::ofstream::trunc);
+    ofs.close();
 
-    if (name == 1)
-        return false;
+    ofstream foutput;
+    ifstream finput;
+    finput.open("save.txt");
+    foutput.open("save.txt", ios::app);
+    if (finput.is_open())
+        foutput << cname << " " << score << " " << apple.get_x() << " " << apple.get_y() << " " << player.GetX() << " " << player.GetY();
+    finput.close();
+    foutput.close();
 }
+
+void Game::LoadGame()
+{
+    int number = 0;
+    string temp;
+    ifstream myFile_Handler;
+
+    myFile_Handler.open("save.txt");
+
+    if (myFile_Handler.is_open())
+    {
+        while (getline(myFile_Handler, temp))
+        {
+                number++;
+        }
+        myFile_Handler.close();
+    }
+
+    string load[6];
+    int i = 0;
+    stringstream ssin(temp);
+    while (ssin.good() && i < 6) {
+        ssin >> load[i];
+        ++i;
+     }
+    
+    if (sscanf_s(load[5].c_str(), "%d", &sgplayerX) != 1)
+    if (sscanf_s(load[4].c_str(), "%d", &sgplayerY) != 1)
+    if (sscanf_s(load[2].c_str(), "%d", &sgappleX) != 1)
+    if (sscanf_s(load[3].c_str(), "%d", &sgappleY) != 1)
+    sgname = load[0];
+    scoreload = load[1];
+
+    conti = true;
+
+
+    cout << temp;
+
+}
+
 string Game::eapple()
 {
     if (apple.collected == true)
